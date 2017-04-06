@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <title>css相关知识</title>
+    <style type="text/css">
+    .container {
+        width: 1000px;
+        margin: 0 auto;
+        height: 100%;
+    }
+    
+    ol li h2 {
+        background-color: #009688;
+        padding-top: 10px;
+        padding-bottom: 10px;
+        padding-left: 5px;
+    }
+    
+    ol li p {
+        background-color: #FFEB3B;
+        padding: 10px;
+        font-size: 16px;
+        word-spacing: 2px;
+        line-height: 29px;
+    }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <ol type="number">
+            <li>
+                <h2>清除浮动有哪些方式？比较好的方式是哪一种？</h2>
+                <p>
+                    <code>
+                        
+                            .div1 {
+                                background: #000080;
+                                border: 1px solid red;
+                                /*解决代码*/
+                                height: 200px;
+                            }
+                            
+                            .div2 {
+                                background: #800080;
+                                border: 1px solid red;
+                                height: 100px;
+                                margin-top: 10px
+                            }
+                            
+                            .left {
+                                float: left;
+                                width: 20%;
+                                height: 200px;
+                                background: #DDD
+                            }
+                            
+                            .right {
+                                float: right;
+                                width: 30%;
+                                height: 80px;
+                                background: #DDD
+                            }
+                      
+                         &lt;div class="div1"&gt;
+                               &lt;div class="left"&gt;Left&lt;/div&gt;;
+                                &lt;div class="right"&gt;Right&lt;/div&gt;
+                          &lt;/div&gt;
+                            &lt;div class="div2"&gt;
+                                footer
+                            &lt;/div&gt;
+                        
+                    </code>
+                </p>
+                <p>
+                    原理：父级div手动定义height，就解决了父级div无法自动获取到高度的问题。 优点：简单、代码少、容易掌握 缺点：只适合高度固定的布局，要给出精确的高度，如果高度和父级div不一样时，会产生问题 建议：不推荐使用，只建议高度固定的布局时使用
+                </p>
+                <h2>结尾处加空div标签clear:both。</h2>
+                <p>
+                    <code>
+                    .div1 { background: #000080; border: 1px solid red; } .div2 { background: #800080; border: 1px solid red; height: 100px; margin-top: 10px } .left { float: left; width: 20%; height: 200px; background: #DDD } .right { float: right; width: 30%; height: 80px; background: #DDD } .clearfloat { clear: both; }</code>
+                </p>
+                <p>
+                    原理：添加一个空div，利用css提高的clear:both清除浮动，让父级div能自动获取到高度 优点：简单、代码少、浏览器支持好、不容易出现怪问题 缺点：不少初学者不理解原理；如果页面浮动布局多，就要增加很多空div，让人感觉很不好 建议：不推荐使用，但此方法是以前主要使用的一种清除浮动方法
+                </p>
+                <h2>父级div定义伪类:after和zoom。</h2>
+                <p> <code>
+                    .div1 {
+                                    background: #000080;
+                                    border: 1px solid red;
+                                    /*解决代码*/
+                                    /*height: 200px;*/
+                                }
+                                
+                                .div2 {
+                                    background: #800080;
+                                    border: 1px solid red;
+                                    height: 100px;
+                                    margin-top: 10px
+                                }
+                                
+                                .left {
+                                    float: left;
+                                    width: 20%;
+                                    height: 200px;
+                                    background: #DDD
+                                }
+                                
+                                .right {
+                                    float: right;
+                                    width: 30%;
+                                    height: 80px;
+                                    background: #DDD
+                                }
+                                
+                                .clearfloat {
+                                    clear: both;
+                                }
+                                .div1.clearfloat:after {
+                                    display: block;
+                                    clear: both;
+                                    content: "";
+                                    visibility: hidden;
+                                    height: 0
+                                }
+                                .div1.clearfloat{
+                                    zoom: 1;
+                                }
+                   </code>
+                </p>
+                <p>
+                    推荐使用
+                </p>
+                <h2>父级div定义overflow:hidden。</h2>
+                <p>
+                    <code>
+                         .div1 {
+                                background: #000080;
+                                border: 1px solid red;
+                                /*解决代码*/
+                                /*height: 200px;*/
+                                overflow: hidden;
+                            }
+                            
+                            .div2 {
+                                background: #800080;
+                                border: 1px solid red;
+                                height: 100px;
+                                margin-top: 10px
+                            }
+                            
+                            .left {
+                                float: left;
+                                width: 20%;
+                                height: 200px;
+                                background: #DDD
+                            }
+                            
+                            .right {
+                                float: right;
+                                width: 30%;
+                                height: 80px;
+                                background: #DDD
+                            }
+
+                    </code>
+                </p>
+                <p>
+                    原理：必须定义width或zoom:1，同时不能定义height，使用overflow:hidden时，浏览器会自动检查浮动区域的高度 优点：简单、代码少、浏览器支持好 缺点：不能和position配合使用，因为超出的尺寸的会被隐藏。 建议：只推荐没有使用position或对overflow:hidden理解比较深的朋友使用。
+                </p>
+            </li>
+            <li>
+                <h2> box-sizing常用的属性有哪些？分别有什么作用？</h2>
+                <p>box-sizing属性可以为三个值之一：content-box（default），border-box，padding-box。 content-box，border和padding不计算入width之内 padding-box，padding计算入width内 border-box，border和padding计算入width之内，其实就是怪异模式了~ ie8+浏览器支持content-box和border-box；
+                </p>
+                <code>
+                    .box{
+                            width: 100px;
+                            height: 100px;
+                            padding: 10px;
+                            border: 5px solid #E6A43F;
+                            margin-bottom: 10px;
+                        }
+                        .box.contentBox{
+                            box-sizing: content-box;
+                            background-color: blue;
+                        }
+                        .box.borderBox{
+                            box-sizing: border-box;
+                            background-color: red;
+                        }
+                        .box.paddingBox{
+                            box-sizing: padding-box;
+                            background-color: green;
+                        }
+
+                </code>
+                <code>
+                    <div class="box contentBox">cotent-box</div>
+<div class="box borderBox">border-box</div>
+<div class="box paddingBox">padding-box</div>
+                </code>
+            </li>
+            <li>
+                <h2>如何在页面上实现一个圆形的可点击区域？</h2>
+                <p>
+                    <code>
+                          .bg {
+                            width: 200px;
+                            height: 200px;
+                            background-color: green;
+                            position: relative;
+                        }
+
+                        .cicle {
+                            width: 100px;
+                            height: 100px;
+                            border-radius: 50%;
+                            background-color: red;
+                            line-height: 100px;
+                            text-align: center;
+                            display: inline-block;
+                            margin: 50px;
+                        }
+                    &lt;div class="bg"&gt;
+                        &lt;div class="cicle" onclick=clickdiv()&gt;
+                            圆形点击
+                        &lt;/div&gt;
+                    &lt;/div&gt;
+                    &lt;!-- 使用map+area coords=“x y圆心，半径”--&gt;
+                    &lt;div class="mapbg"&gt;
+                        &lt;img src="#" width="658" height="4424" border="0" usemap="#Map" /&gt;
+                        &lt;map name="Map" id="Map"&gt;
+                            &lt;area shape="circle" coords="326,205,100" href="index4.html" target="_blank" /&gt;
+                        &lt;/map&gt;
+                    &lt;/div&gt;
+
+                    </code>
+                </p>
+            </li>
+        </ol>
+    </div>
+</body>
+
+</html>

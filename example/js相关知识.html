@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <title>css相关知识</title>
+    <style type="text/css">
+    .container {
+        width: 1000px;
+        margin: 0 auto;
+        height: 100%;
+    }
+    
+    ol li h2 {
+        background-color: #009688;
+        padding-top: 10px;
+        padding-bottom: 10px;
+        padding-left: 5px;
+    }
+    
+    ol li p {
+        background-color: #FFEB3B;
+        padding: 10px;
+        font-size: 16px;
+        word-spacing: 2px;
+        line-height: 29px;
+    }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <ol type="number">
+            <li>
+                <h2>js是一门什么样的语言及特点？</h2>
+                <p>&nbsp;&nbsp;&nbsp;&nbsp;js是一种基于对象和事件驱动的并具有相对安全性的客户端脚本语言。也是一种广泛用于web客户端开发的脚本语言，常用来给html网页添加动态功能，如响应用户的各种操作。
+                    <br>&nbsp;&nbsp;&nbsp;&nbsp;主要的目的是为了解决服务器端语言遗留的速度问题，为客户提供更流畅的浏览效果。
+                    <br> （详细拓展：http://www.360doc.com/content/14/0317/11/10186276_361233415.shtml）
+                </p>
+            </li>
+            <li>
+                <h2>js的数据类型？</h2>
+                <p>基本数据类型：String、boolean、Number、undefined、null
+                    <br> 引用数据类型：Object、Array、Date、RegExp、Function
+                    <br> 拓展：如何判断数组数据类型？
+                    <br>1、通过专有方法判断如：push(),pop();//可自己给变量定义该方法，有时失效
+                    <br>2、 obj instanceof Array 返回值判断；
+                    <br> 3、es5和jquery都有方法Array.isArray()。
+                    <br> 4、toString.call(param) 判断；返回格式 [object Undefined]
+                    <br> 5、obj.constructor === Function 返回值判断
+                    <br> </p>
+            </li>
+            <li>
+                <h2>获取所有的checkbox？</h2>
+                <p>
+                    var domlist = document.getElementsByTagName("input");
+                    <br> var checkboxlist = [];
+                    <br> var len = domlist.length;
+                    <br> for (var i = 0; i
+                    < len; i++) {<br>
+                        if(domlist[i].type == "checkbox"){
+                        <br> checkboxlist.push(domlist[i])
+                        <br> }
+                        <br> }
+                </p>
+            </li>
+            <li>
+                <h2>绑定事件的方式？</h2>
+                <p>
+                    1、直接在dom里绑定：
+                    <!-- <div onclick="test()"></div> -->
+                    <br> 2、在js中通过onclick绑定：xxx.onclick=test;
+                    <br> 3、通过事件绑定：dom.addEventListener("click",test,boolean)
+                    <br> (拓展：js事件流模型？)
+                    <br> “事件冒泡”：事件由最具体的元素接收，然后逐级向上传播；
+                    <br> “事件捕捉”：事件由最不具体的节点先接收，然后逐级向下，一直到最具体元素；
+                    <br> “dom事件流”：三个阶段：事件捕捉，目标阶段，事件冒泡；
+                    <br> （附：事件流详解）
+                    <br> ie事件流：冒泡型事件：button->div->body
+                    <br> netscape事件流：捕获型事件：body->div->button
+                    <br> dom事件模型：body->div->button->button->div->body;
+                    <br> dom事件流同时支持两种事件模型：但是捕获事件先发生，从document对象开始，也在document对象结束
+                    <br> ie9以下不支持addEventListener/removeEventListener,采用attachEvent/detachEvent
+                    <br> (无关东东css：
+                    <!--[if lt IE 9]><![endif]-->)
+                    <br> （附：阻止事件传播）
+                    <br> w3c中，使用stopPropagation()方法阻止冒泡;阻止默认事件：preventDefault()；
+                    <br> ie中，cancelBubble = true阻止事件冒泡；阻止默认事件：window.event.returnValue = false;
+                    <br>
+                </p>
+            </li>
+            <li>
+                <h2>什么是Ajax和JSON，它们的优缺点？</h2>
+                <p>
+                    Ajax（Asynchronous Javascript And XML/异步的javascript和xml）。
+                    <br> 优点：
+                    <br> 可以使得页面不重载全部内容的情况下加载局部内容，降低数据传输量。
+                    <br> 避免用户不断刷新或者跳转页面，提高用户体验。
+                    <br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 缺点：
+                    <br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 对搜索引擎不友好。
+                    <br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 要实现ajax下的前后退功能成本较大
+                    <br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 可能造成请求数的增加
+                    <br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 跨域问题限制
+                    <br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; JSON：json是一种轻量级的数据交换格式，ECMA（欧洲计算机制造商协会）的一个子集；
+                    <br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;优点：轻量级，占用带宽小、易于人的阅读和编写，便于机器（js）解析，支持复合数据类型（数组，对象，字符串，数字），能直接为服务器端代码使用，大大简化了服务器端和客户端的代码开发量。
+                    <br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;缺点：相对xml通用性较差，数据可描述性较差；
+                    <br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;（拓展：json与xml的区别？）
+                    <br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;xml定义：可拓展标记语言，用于标记电子文件使其具有结构性的标记语言，可以用来标记数据、定义数据类型，是一种允许用户对自己的标记语言进行定义的语言。xml是SGML（标准通用标记语言）的子集，非常适合web传输。
+                    <br> xml提供统一的方法来描述和交换独立于应用程序或供应商的结构化数据。
+                    <br> xml优点：
+                    <br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;1、格式统一，符合标准；
+                    <br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;2、容易与其他系统进行交互，数据共享比较方便
+                    <br> 缺点：
+                    <br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;1、xml文件格式文件庞大，格式复杂，传输占用更多带宽
+                    <br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;2、服务器和客户端都需要花费大量代码来解析xml，服务器和客户端代码变得异常复杂和不容易维护。
+                    <br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 3、客户端不同浏览器之间解析xml的方式不一致，需要重复编写很多代码。
+                    <br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 4、服务器端和客户端解析xml花费更多资源和时间
+                    <br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 与json的优缺点比较？
+                    <br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 1、可读性、可拓展性都很出色，但是xml的编码难度更高。
+                    <br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 2、json的解码难度几乎为0，而xml得考虑子父节点；
+                    <br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 3、xml的通用性更广，json则广泛应用于前端。
+                    <br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 4、json相对xml，数据体积更小；与js交互更方便；
+                    <br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 5、json对数据的描述性比xml较差；
+                    <br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 6、json的无论是传播还是解析速度远远快于xml；
+                    <br>
+                </p>
+            </li>
+            <li>
+                <h2>什么情况会出现undefined？</h2>
+                <p>
+                    &nbsp; &nbsp; &nbsp; &nbsp; 当只声明变量，并未赋值初始化的时候这个变量的值就是undefined；
+                    <br> &nbsp; &nbsp; &nbsp; &nbsp; (拓展：解释原因？)
+                    <br> &nbsp; &nbsp; &nbsp; &nbsp; var a=null;
+                    <br> &nbsp; &nbsp; &nbsp; &nbsp; console.log(typeof a);&nbsp; &nbsp; &nbsp; &nbsp; //&nbsp; &nbsp; &nbsp; &nbsp; object
+                    <br> &nbsp; &nbsp; &nbsp; &nbsp; null是一个只有一个值的数据类型，这个值就是null。表示一个空指针对象。所以typeof返回object；
+                    <br>
+                </p>
+            </li>
+            <li>
+                <h2>双等号的类型转换？</h2>
+                <p>
+                    &nbsp; &nbsp; &nbsp; &nbsp; undefined == null; // true
+                    <br> &nbsp; &nbsp; &nbsp; &nbsp; 1 == true;&nbsp;&nbsp;// true
+                    <br> &nbsp; &nbsp; &nbsp; &nbsp; 2 == true;&nbsp;&nbsp;// false
+                    <br> &nbsp; &nbsp; &nbsp; &nbsp; 0 == false; // true
+                    <br> &nbsp; &nbsp; &nbsp; &nbsp; 0 == '';&nbsp; &nbsp;// true
+                    <br> &nbsp; &nbsp; &nbsp; &nbsp; NaN == NaN; // false
+                    <br> &nbsp; &nbsp; &nbsp; &nbsp; [] == false; // true
+                    <br> &nbsp; &nbsp; &nbsp; &nbsp; [] == ![];&nbsp;&nbsp;// true
+                    <br> &nbsp; &nbsp; &nbsp; &nbsp; // alert(!![])&nbsp; &nbsp; &nbsp; &nbsp; //true
+                    <br> &nbsp; &nbsp; &nbsp; &nbsp; // alert(![])&nbsp; &nbsp; &nbsp; &nbsp; //false
+                    <br> &nbsp; &nbsp; &nbsp; &nbsp; // alert([] == 0)&nbsp; &nbsp; &nbsp; &nbsp; //true
+                    <br> &nbsp; &nbsp; &nbsp; &nbsp; // alert(false == 0)&nbsp; &nbsp; &nbsp; &nbsp; //true
+                    <br> &nbsp; &nbsp; &nbsp; &nbsp; 分析：undefined与null 但不全等（===）
+                    <br> &nbsp; &nbsp; &nbsp; &nbsp; 当为number与string时，会将string转换为number；
+                    <br> &nbsp; &nbsp; &nbsp; &nbsp; number和boolean时，会将boolean转换为number
+                    <br> &nbsp; &nbsp; &nbsp; &nbsp; number或string与Object，会将Object转换成number或string
+                    <br> &nbsp; &nbsp; &nbsp; &nbsp; （附：js中的数据类型转换？）
+                    <br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 函数转换：parseInt()、parseFloat()、toString()
+                    <br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 强类型转换：Boolean()、Number()、String()
+                    <br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 弱类型转换：“==”、“-”、“+”、if（）
+                    <br> &nbsp; &nbsp; &nbsp; &nbsp; （拓展：for循环中的效率问题？）
+                    <br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 1.for(var i=0;i&lt;arr.length;i++)
+                    <br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 2.for(var i in arr)
+                    <br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 3.for(var i=0,len=arr.length;i&lt;len;i++)
+                    <br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 第三种效率更高！
+                    <br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 在大数据下：
+                    <br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 第三种方式比第一种执行速度快3~4倍；
+                    <br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 至于第三种比第三种快100多倍开外（详细数据：http://www.111cn.net/wy/js-ajax/39368.htm）
+                    <br>
+                </p>
+            </li>
+            <li>
+                <h2>基础API？</h2>
+                <p>
+                    &nbsp; &nbsp; &nbsp; &nbsp; 数组：
+                    <br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; var numberArray = [3,6,2,4,1,5];
+                    <br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 倒序：numberArray.reverse();
+                    <br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 降序：numberArray.sort(function(a-b){return b-a})
+                    <br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; a.concat(b,c,d)
+                    <br> &nbsp; &nbsp; &nbsp; &nbsp; 日期：
+                    <br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 输出YYYY-MM-DD
+                    <br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; function getYMD(){
+                    <br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; var date = new Date();
+                    <br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; var y = date.getFullYear();
+                    <br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; var m = date.getMonth()+1;
+                    <br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; var d = date.getDate();
+                    <br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; function getDouble(str){
+                    <br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; var str;
+                    <br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; if(str &lt; 10){
+                    <br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; return str = "0"+str;
+                    <br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; }else{
+                    <br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; return str = str;
+                    <br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; }
+                    <br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; }
+                    <br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; return y +"-"+getDouble(m)+"-"+getDouble(d);
+                    <br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; }
+                    <br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; （值得一提：date.getDay() 返回星期0~6&nbsp;&nbsp;星期日~星期六）</p>
+            </li>
+            <li>
+                <h2>基础算法？已知：var str="get-element-by-id",写一个函数转化成驼峰形式（你懂得）？</h2>
+                <p>
+                    &nbsp; &nbsp; &nbsp; &nbsp; function Naizi(str){
+                    <br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; var arr = str.split("-");
+                    <br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; var target = "";
+                    <br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; for(var i=0,len=arr.length;i&lt;len;i++){
+                    <br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; target+=arr[i].substr(0,1).toUpperCase()+arr[i].substr(1);
+                    <br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; }
+                    <br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; return target;
+                    <br> &nbsp; &nbsp; &nbsp; &nbsp; }
+                    <br>
+                </p>
+            </li>
+            <li>
+                <h2>dom增删查改？</h2>
+                <p>
+                    &nbsp; &nbsp; &nbsp; &nbsp; 增：
+                    <br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; document.createElement(tag);
+                    <br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; document.createTextNode();
+                    <br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; document.createDocumentFragment()
+                    <br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; dom.appendChild(sondom);
+                    <br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; dom.insertBefore(newdom,targetdom);
+                    <br> &nbsp; &nbsp; &nbsp; &nbsp; 删：
+                    <br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; document.removeChild();
+                    <br> &nbsp; &nbsp; &nbsp; &nbsp; 改：
+                    <br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; document.replaceChild();
+                    <br> &nbsp; &nbsp; &nbsp; &nbsp; 查：
+                    <br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; getElementById()
+                    <br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; getElementsByTagName()
+                    <br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; getElementsByName();
+                    <br>
+                </p>
+            </li>
+            <li>
+                <h2>字符串操作？</h2>
+                <p>
+                    &nbsp; &nbsp; &nbsp; &nbsp; var str = 'http://item.taobao.com/item.html?a=1&amp;b=2&amp;c=&amp;d=xxx&amp;e';
+                    <br> &nbsp; &nbsp; &nbsp; &nbsp; //将GET参数按照键值对的形式输出json
+                    <br> &nbsp; &nbsp; &nbsp; &nbsp; function getGEt(str){
+                    <br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; var dataStr = str.split("?")[1];
+                    <br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; var result = {};
+                    <br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; if(dataStr.indexOf("&amp;") &gt; 0){
+                    <br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; var bigArr = dataStr.split("&amp;");
+                    <br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; for(var i = 0,len = bigArr.length;i&lt;len;i++){
+                    <br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; var smallArr = bigArr[i].split("=");
+                    <br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; result[smallArr[0]] = smallArr[1];
+                    <br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; }
+                    <br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; }else{
+                    <br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; var arr = dataStr.split("=");
+                    <br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; result[arr[0]] = arr[1];
+                    <br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; }
+                    <br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; return result;
+                    <br> &nbsp; &nbsp; &nbsp; &nbsp; }
+                </p>
+            </li>
+        </ol>
+    </div>
+</body>
+
+</html>
